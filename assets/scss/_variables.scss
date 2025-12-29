@@ -1,0 +1,78 @@
+// Основные переменные
+$color-dark: #1E1E1E;
+$color-gray: #383838;
+$color-light-gray: #eeeeee;
+$color-light: #f8f9fa;
+$color-primary: #2F4DA5;
+// $color-primary-dark: darken($color-primary, 10%);
+$color-white: #ffffff;
+$color-black: #000000;
+$color-success: #28a745;
+$color-danger: #dc3545;
+$color-warning: #ffc107;
+$color-info: #17a2b8;
+
+// Переменные для темного режима
+$color-dark-bg: #121212;
+$color-dark-surface: #1e1e1e;
+$color-dark-border: #333333;
+$color-dark-text: #f8f9fa;
+$color-dark-text-secondary: #aaaaaa;
+
+// Типографика
+$font-primary: 'Involve', sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.5;
+
+// Брейкпоинты
+$breakpoint-xs: 480px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// Контейнер
+$container-padding: 15px;
+$container-max-width: 1200px;
+
+// Z-индексы
+$z-index-dropdown: 1000;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// Тени
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// Скругления
+$border-radius-sm: 10px;
+$border-radius-md: 20px;
+$border-radius-lg: 30px;
+
+// Переходы
+$transition-base: all 0.3s ease;
+$transition-slow: all 0.5s ease;
+$transition-fast: all 0.2s ease;
+
+// CSS переменные для поддержки темной темы
+:root {
+  --color-dark: #{$color-dark};
+  --color-gray: #{$color-gray};
+  --color-light-gray: #{$color-light-gray};
+  --color-primary: #{$color-primary};
+  --color-white: #{$color-white};
+  --color-black: #{$color-black};
+  --color-success: #{$color-success};
+  --color-danger: #{$color-danger};
+  --color-warning: #{$color-warning};
+  --color-info: #{$color-info};
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --body-bg: #f8f9fa;
+}

@@ -1,0 +1,62 @@
+// Основной файл стилей, импортирующий все прочие файлы
+
+// Импорт переменных и миксинов (используем @use вместо устаревшего @import)
+@use "variables" as *;
+@use "mixins" as *;
+
+// Импорт базовых стилей
+@use "base" as *;
+
+// Импорт компонентов
+@use "components" as *;
+
+// Импорт шапки сайта
+@use "header" as *;
+
+// Импорт страниц
+@use "home" as *;
+@use "delivery" as *;
+
+// Импорт футера
+@use "footer" as *;
+
+// Импорт мобильного меню
+@use "mobile-menu" as *;
+
+// Импорт шрифтов
+
+// Подключение шрифтов Involve
+@font-face {
+    font-family: 'Involve';
+    src: url('../fonts/Involve-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Involve';
+    src: url('../fonts/Involve-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Involve';
+    src: url('../fonts/Involve-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Involve';
+    src: url('../fonts/Involve-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Onest:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Ysabeau+Infant:ital,wght@0,1..1000;1,1..1000&display=swap');
+

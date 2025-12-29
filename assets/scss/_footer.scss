@@ -1,0 +1,147 @@
+footer {
+  padding: 50px 0;
+  background-image: url(../images/footer-line.png);
+  background-repeat: no-repeat;
+  background-position: 285px;
+  background-size: cover;
+  background-color: rgba(17, 17, 17, 1);
+  margin-top: 100px;
+
+  .wrapper {
+    display: flex;
+    max-width: 1820px;
+    margin: 0 auto;
+    width: calc(100% - 20px);
+
+    .logo-footer {
+      margin-right: 280px;
+      img{
+        object-fit: contain;
+        width: 200px;
+        height: 80px;
+      }
+    }
+
+    .list {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+
+      .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-width: 300px;
+        width: 100%;
+
+        .top {
+          margin-top: 25px;
+        }
+
+        .text {
+          font-size: 16px;
+
+        }
+
+        .text.top {
+          margin-top: 25px;
+        }
+
+        p {
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 110%;
+          color: rgba(255, 255, 255, 0.5);
+          margin-bottom: 5px;
+        }
+
+        a {
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 110%;
+          color: #FFFFFF;
+        }
+      }
+    }
+
+    @media(max-width:1385px) {
+      .logo-footer {
+        margin-right: 50px;
+      }
+    }
+
+    @media(max-width:1150px) {
+      flex-direction: column;
+      gap: 50px;
+
+      .list {
+        flex-wrap: wrap;
+
+        .nav {
+          p {
+            font-size: 16px;
+          }
+
+          a {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    @media(max-width:768px) {
+      .list {
+        gap: 50px;
+      }
+    }
+  }
+
+  .bottom {
+    max-width: 1820px;
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+
+    p {
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    a {
+      max-width: 300px;
+      width: 100%;
+      text-align: start;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 20px;
+    }
+
+    @media(max-width:1150px) {
+      margin-top: 50px;
+
+      a {
+        font-size: 16px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+
+    @media(max-width:768px) {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  @media(max-width:1024px) {
+    margin-top: 70px;
+    background-position: top;
+  }
+
+  @media(max-width:768px) {
+    margin-top: 50px;
+  }
+}

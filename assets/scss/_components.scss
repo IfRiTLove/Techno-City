@@ -1,0 +1,958 @@
+// Стили компонентов интерфейса
+
+@use "variables" as *;
+@use "mixins" as *;
+
+// Кнопки
+.btn {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: $border-radius-md;
+  transition: $transition-base;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba($color-primary, 0.25);
+  }
+
+  // Размеры кнопок
+  &--sm {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: $border-radius-sm;
+  }
+
+  &--lg {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    border-radius: $border-radius-lg;
+  }
+
+  // Варианты кнопок
+  &--primary {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &:hover {
+      color: $color-white;
+    }
+  }
+
+  &--transparent {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: unset;
+    color: $color-white;
+    text-decoration: none;
+    border-radius: $border-radius-sm;
+    transition: $transition-base;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'onest';
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.5);
+      color: $color-white;
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+    }
+  }
+
+}
+
+// Чекбоксы и радиокнопки
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+
+  /* Стили для input внутри label */
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked~.checkbox__text:before {
+      border-color: $color-primary;
+      background-color: $color-primary;
+    }
+
+    &:checked~.checkbox__text:after {
+      display: block;
+    }
+
+    &:focus~.checkbox__text:before {
+      box-shadow: 0 0 0 0.25rem rgba($color-primary, 0.25);
+    }
+  }
+
+  /* Совместимость с разметкой: поддерживаем как вложенный элемент .checkbox__text, так и
+     вариант с отдельными спанами .checkbox__box и .checkbox__label, используемый в HTML. */
+
+  &__text {
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: -30px;
+      top: 2px;
+      width: 20px;
+      height: 20px;
+      border: 2px solid $color-gray;
+      border-radius: $border-radius-sm;
+      background-color: $color-white;
+      transition: $transition-base;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      left: -26px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z' fill='%23ffffff'/%3E%3C/svg%3E") no-repeat center center / contain;
+      display: none;
+    }
+  }
+
+  /* Альтернативная разметка: отдельно позиционированный элемент, который визуализирует коробку */
+  .checkbox__box {
+    position: absolute;
+    left: 0px;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    background-color: transparent;
+    transition: $transition-base;
+
+    &:focus {
+      outline: none;
+    }
+
+    @media(max-width:768px) {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .checkbox__box::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 19px;
+    height: 19px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z' fill='%23ffffff'/%3E%3C/svg%3E") no-repeat center center / contain;
+    display: none;
+
+    @media(max-width:768px) {
+      width: 15px;
+      height: 15px;
+      left: -1px;
+    }
+  }
+
+  /* Поведение при состоянии checked / focus для альтернативной разметки */
+  input:checked~.checkbox__box {
+    border-color: $color-white;
+    background-color: transparent;
+  }
+
+  input:checked~.checkbox__box::after {
+    display: block;
+  }
+
+  input:focus~.checkbox__box {
+    box-shadow: 0 0 0 0.25rem rgba($color-primary, 0.25);
+  }
+
+  .checkbox__label {
+    /* небольшой отступ для текстовой метки, если используется отдельный спан */
+    margin-left: 5px;
+    display: inline-block;
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    font-weight: 500;
+
+    @media(max-width:768px) {
+      font-size: 12px;
+
+    }
+  }
+
+}
+
+section {
+  max-width: 1820px;
+  margin: 0 auto;
+  width: calc(100% - 20px);
+
+  @media(max-width: 768px) {
+    width: calc(100% - 40px);
+  }
+}
+
+// Слайдер
+.slider-main {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+  border-radius: $border-radius-sm;
+  position: relative;
+
+  .swiper-wrapper {
+    .swiper-slide {
+      font-size: 18px;
+      background: #444;
+      display: flex;
+      flex-direction: column;
+      max-height: 500px;
+      height: 100vh;
+      position: relative;
+      padding: 50px;
+      box-sizing: border-box;
+      border-radius: $border-radius-sm;
+
+      .slide-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        border-radius: $border-radius-sm;
+
+      }
+
+      // &::before {
+      //   content: "";
+      //   position: absolute;
+      //   top: 0;
+      //   left: 0;
+      //   width: 100%;
+      //   height: 100%;
+      //   background: linear-gradient(270deg, rgba(49, 85, 190, 0) 0%, rgba(49, 85, 190, 1) 100%);
+      //   z-index: 2;
+      //   pointer-events: none;
+      // }
+
+      .top {
+        display: flex;
+        flex-direction: column;
+        z-index: 10;
+        gap: 20px;
+
+        .title {
+          font-size: 48px;
+          font-weight: 700;
+          font-family: "onest";
+          line-height: 100%;
+          max-width: 100%;
+          color: $color-white;
+        }
+
+        p {
+          max-width: 500px;
+          font-size: 18px;
+          color: $color-white;
+        }
+      }
+
+      .btn--transparent {
+        position: relative;
+        z-index: 10;
+        margin-top: auto;
+        max-width: 320px;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        background: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+        border-radius: $border-radius-sm;
+      }
+    }
+  }
+
+  // Стили для пагинации
+  .swiper-pagination {
+    position: absolute !important;
+    bottom: 50px !important;
+    right: 50px !important;
+    left: auto !important;
+    width: auto !important;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    z-index: 20;
+
+    .swiper-pagination-bullet {
+      width: 16px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.4);
+      opacity: 1;
+      margin: 0 !important;
+      transition: $transition-base;
+
+      &.swiper-pagination-bullet-active {
+        background: $color-white;
+      }
+    }
+  }
+
+  @media(max-width:1024px) {
+    max-height: 400px;
+
+    .swiper-wrapper {
+      max-height: 400px;
+
+      .swiper-slide {
+        padding: 20px;
+        max-height: 400px;
+      }
+    }
+
+    .swiper-pagination {
+      bottom: 20px !important;
+      right: 20px !important;
+    }
+  }
+
+  @media(max-width:768px) {
+    max-height: 400px;
+
+    .swiper-wrapper {
+      max-height: 400px;
+
+      .swiper-slide {
+        padding: 20px;
+        max-height: 400px;
+        background: transparent;
+
+        .top {
+          gap: 20px;
+
+          .title {
+            font-size: 36px;
+          }
+
+        }
+      }
+    }
+
+    .swiper-pagination {
+      bottom: 20px !important;
+      right: 20px !important;
+    }
+  }
+
+  @media(max-width:640px) {
+
+    max-height: 420px;
+    height: 100vh;
+
+    .swiper-wrapper {
+      max-height: 420px;
+      height: 100vh;
+
+
+      .swiper-slide {
+        padding: 10px;
+        padding-bottom: 40px;
+
+        .top {
+          gap: 20px;
+
+          .title {
+            font-size: 30px;
+          }
+
+          p {
+            font-size: 16px;
+          }
+        }
+
+        .btn--transparent {
+          max-width: 100%;
+          font-size: 16px;
+        }
+      }
+
+
+    }
+
+    .swiper-pagination {
+      bottom: 0px !important;
+      right: 50% !important;
+      translate: 50%;
+
+      .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background: rgba(163, 163, 163, 0.4) !important;
+
+
+      }
+
+      .swiper-pagination-bullet-active {
+        background: rgba(163, 163, 163, 1) !important;
+      }
+    }
+  }
+}
+
+// Карточки товарa
+.product-cart {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-radius: 5px 5px 0 0;
+  flex: 0 0 340px;
+  min-width: 340px;
+  scroll-snap-align: start;
+
+  .prod-image {
+    max-height: 348px;
+    max-width: 340px;
+    width: 340px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 5px;
+
+
+  }
+
+  .product-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 100%;
+    justify-content: space-between;
+
+    .title {
+      display: -webkit-box;
+      line-clamp: 3;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2;
+      max-height: calc(1.2em * 3);
+      max-width: 340px;
+      font-size: 18px;
+      font-weight: 500;
+      color: rgba(17, 17, 17, 1);
+    }
+
+    .wrap-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .product-price {
+        .new-price {
+          font-weight: 700;
+          font-size: 24px;
+          color: rgba(17, 17, 17, 1);
+        }
+      }
+
+      .buttons {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .btn,
+        .favorite {
+          background-color: $color-primary;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 24px;
+            height: 24px;
+            max-width: 24px;
+            object-fit: contain;
+
+          }
+        }
+
+        .favorite {
+          background-color: transparent;
+        }
+
+        .btn {
+          &:hover {
+            background-color: #2f4da5c8;
+            transition: all 0.3s ease;
+          }
+        }
+      }
+    }
+  }
+
+  @media(max-width:768px) {
+    flex: 0 0 260px;
+    min-width: 260px;
+    max-height: 412px;
+    gap: 10px;
+
+    .prod-image {
+      max-height: 280px;
+      max-width: 260px;
+      width: 260px;
+      height: 100vh;
+    }
+
+    .product-content {
+      gap: 10px;
+
+      .title {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 150%;
+        max-height: 4.6em;
+      }
+
+      .wrap-price {
+        .product-price {
+          .new-price {
+            font-size: 24px;
+          }
+        }
+
+        .buttons {
+
+          .btn,
+          .favorite {
+            width: 50px;
+            height: 50px;
+
+            img {
+              width: 24px;
+              height: 24px;
+              max-width: 24px;
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Форма консультации
+.ask-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 50px;
+  background-image: url(../images/bg-form.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+  margin-top: 150px;
+  gap: 20px;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 800px;
+    flex-basis: 800px;
+    min-width: 500px;
+
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      p {
+        font-size: 20px;
+        line-height: 120%;
+        color: $color-white;
+        font-weight: 400;
+      }
+
+      a {
+        font-size: 48px;
+        line-height: 120%;
+        color: $color-white;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+
+    span {
+      font-size: 24px;
+      line-height: 120%;
+      color: $color-white;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: auto;
+    }
+  }
+
+  .right {
+    max-width: 860px;
+    width: 100%;
+    max-height: 440px;
+    height: 100%;
+
+    form {
+      background-color: #435EAE;
+      padding: 40px 40px 60px 40px;
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+
+      input,
+      textarea,
+      .btn,
+      .form-row {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      input[type="text"]:nth-of-type(1),
+      input[type="text"]:nth-of-type(2),
+      input[type="tel"],
+      input[type="email"] {
+        grid-column: auto;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 0;
+        height: 60px;
+        border-radius: 10px;
+        padding: 0 20px;
+        font-size: 18px;
+        line-height: 100%;
+        font-weight: 400;
+        color: $color-white;
+
+        &::placeholder {
+          color: $color-white;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      textarea {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 0;
+        height: 60px;
+        border-radius: 10px;
+        padding: 20px 20px;
+        font-size: 18px;
+        line-height: 100%;
+        font-weight: 400;
+        color: $color-white;
+
+        &::placeholder {
+          color: $color-white;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      textarea,
+      .btn,
+      .form-row {
+        grid-column: 1 / -1;
+      }
+
+      .btn {
+        height: 60px;
+        background-color: rgba(255, 255, 255, 1);
+        color: $color-primary;
+        font-weight: 700;
+        font-size: 18px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+
+      .form-consent {
+        margin-top: 20px;
+      }
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  &--white {
+    background-color: rgba(152, 183, 215, 0.1);
+    background-image: url(../images/bg2.png);
+
+    .left {
+      max-width: 639px;
+      min-width: 510px;
+
+      .text {
+        p {
+          color: rgba(17, 17, 17, 1);
+        }
+
+        a {
+          color: $color-primary;
+          font-size: 40px;
+        }
+      }
+
+      span {
+        color: rgba(17, 17, 17, 1);
+      }
+    }
+
+    .right {
+      max-width: 670px;
+
+      form {
+        background-color: transparent;
+        padding: 0;
+
+        input[type="text"]:nth-of-type(1),
+        input[type="text"]:nth-of-type(2),
+        input[type="tel"],
+        input[type="email"] {
+          grid-column: auto;
+          background-color: $color-white;
+          border: 0;
+          height: 60px;
+          border-radius: 10px;
+          padding: 0 20px;
+          font-size: 18px;
+          line-height: 100%;
+          font-weight: 400;
+          color: rgba(163, 163, 163, 1);
+
+          &::placeholder {
+            color: rgba(163, 163, 163, 1);
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        textarea {
+          background-color: $color-white;
+          color: rgba(163, 163, 163, 1);
+
+          &::placeholder {
+            color: rgba(163, 163, 163, 1);
+          }
+        }
+
+        .btn {
+          background-color: $color-primary;
+          color: $color-white;
+        }
+
+        .form-consent {
+          .checkbox--custom {
+
+            .checkbox__box {
+              border: solid 1px $color-primary;
+
+              &:after {
+                background-image: url(../images/check.svg);
+                width: 18px;
+                height: 17px;
+
+                @media(max-width:768px) {
+                  width: 14px;
+                  height: 13px;
+                  left: 0px;
+                  top: 1px;
+                }
+              }
+            }
+
+            .checkbox__label {
+              color: rgba(17, 17, 17, 1);
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media(max-width:1200px) {
+    flex-direction: column;
+    gap: 60px;
+
+    .left {
+      flex-basis: 0;
+    }
+
+    .left,
+    .right {
+      max-width: 100%;
+    }
+  }
+
+  @media(max-width:1200px) {
+    background-position: left;
+
+    .left {
+      span {
+        font-size: 18px;
+      }
+    }
+  }
+
+  @media(max-width:990px) {
+    padding: 20px;
+    margin-top: 70px;
+
+    .right {
+      form {
+        padding: 20px 10px 30px 10px;
+      }
+    }
+  }
+
+  @media(max-width:768px) {
+    gap: 30px;
+    margin-top: 50px;
+
+    .left {
+      gap: 20px;
+      min-width: 0;
+
+      .text {
+        gap: 10px;
+
+        p {
+          font-size: 16px;
+        }
+
+        a {
+          font-size: 26px;
+        }
+      }
+
+      span {
+        margin-top: 10px;
+        font-size: 12px;
+      }
+    }
+
+    .right {
+      max-height: none;
+
+      form {
+        padding: 10px 10px 20px 10px;
+
+        input {
+          height: 50px !important;
+          font-size: 14px !important;
+
+          &::placeholder {
+            font-size: 14px !important;
+          }
+        }
+
+        input[type="checkbox"] {
+          height: fit-content !important;
+          width: fit-content !important;
+        }
+
+        textarea {
+          height: 150px !important;
+
+          &::placeholder {
+            font-size: 14px !important;
+          }
+        }
+
+        .btn {
+          margin: 0;
+          height: 50px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+}
+
+// Хлебные крошки
+.breadcrumbs {
+  max-width: 1820px;
+  width: calc(100% - 20px);
+  margin: 0 auto;
+  margin-top: 60px;
+
+  .breadcrumbs-link {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(163, 163, 163, 1);
+  }
+
+  .breadcrumbs-separator {
+    color: rgba(163, 163, 163, 1);
+
+  }
+
+  span {
+    font-size: 16px;
+    font-weight: 400;
+    color: $color-primary;
+  }
+
+
+  @media(max-width:1024px) {
+    margin-top: 40px;
+  }
+
+  @media(max-width:768px) {
+    margin-top: 18px;
+  }
+}
